@@ -6,6 +6,9 @@ This README would normally document whatever steps are necessary to get your app
 
 Source code for Popeel, a potato-peeling toy software "robot".
 
+
+(Rest of file preserved from what Bitbucket suggests.)
+
 * Quick summary
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
