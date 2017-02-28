@@ -26,13 +26,14 @@ class Popeel:
 		else:
 			self.basket = randrange(1, 16)
 		if self.basket == 0:
-			print _create_message("Starting out with no potatoes in my basket.")
+			print(_create_message("Starting out with no potatoes in my basket."))
 		else:
-			print _create_message("Starting out with " + str(self.basket) + " potatoes in my basket.")
+			print(_create_message("Starting out with " + str(self.basket) + " potatoes in my basket."))
 
 	def set_task(self, n):
 		"set task to peeling n potatoes"
 		self.task = n
+		print(_create_message("My task now is to peel " + str(n) + " potatoes."))
 	
 	def peel_1_potato(self):
 		if self.sleeping:
@@ -44,48 +45,48 @@ class Popeel:
 				mm = str(self.potatoes) + " peeled potatoes so far."
 			else:
 				mm = ""
-			print _create_message("Peeling one potato.", mm)
+			print(_create_message("Peeling one potato.", mm))
 			if self.potatoes == self.task:
-				print _create_message("Task completed.",
-									"I LIKE that very much. :-)")
+				print(_create_message("Task completed.",
+									"I LIKE that very much. :-)"))
 		else:
-			print _create_message("Asked to peel one potato but no potatoes left in the basket.",
-								"CAN'T DO IT. I go sleeping instead. Goodnight.")
+			print(_create_message("Asked to peel one potato but no potatoes left in the basket.",
+								"CAN'T DO IT. I go sleeping instead. Goodnight."))
 			self.sleeping = True
 
 	def refill_basket(self):
 		if self.sleeping:
 			return
 		if self.basket > 0:
-			print _create_message("I HATE to be sent for potatoes when I still have " + str(self.basket) + " potatoes left. :-(")
+			print(_create_message("I HATE to be sent for potatoes when I still have " + str(self.basket) + " potatoes left. :-("))
 		else:
-			print _create_message("I don't have any potatoes in my basket.")
+			print(_create_message("I don't have any potatoes in my basket."))
 			self.basket = randrange(5, 30)
-			print _create_message("Fetched more potatoes.", "I have now " + str(self.basket) + " of them. :-)")
-			
+			print(_create_message("Fetched more potatoes.", "I have now " + str(self.basket) + " of them. :-)"))
+
 	def go_sleep(self):
 		if self.sleeping:
-			print _create_message("Already fast asleep, sorry.")
+			print(_create_message("Already fast asleep, sorry."))
 		else:
 			self.sleeping = True
-			print _create_message("I go sleeping. Goodnight.")
+			print(_create_message("I go sleeping. Goodnight."))
 		
 	def discard_basket(self):
 		if self.sleeping:
-			print _create_message("You woke me up! Shame on you. Back to sleep. Goodnight.")
+			print(_create_message("You woke me up! Shame on you. Back to sleep. Goodnight."))
 			return
 		if self.basket > 0:
-			print _create_message("Returning " + str(self.basket) + " potatoes to the main store. :-)")
+			print(_create_message("Returning " + str(self.basket) + " potatoes to the main store. :-)"))
 		self.basket = 0
 	
 	def basket_is_empty(self):
 		if self.sleeping:
-			print _create_message("You woke me up! Shame on you. Back to sleep. Goodnight.")
+			print(_create_message("You woke me up! Shame on you. Back to sleep. Goodnight."))
 		return self.basket == 0
 
 	def enough_potatoes(self):
 		if self.sleeping:
-			print _create_message("You woke me up! Shame on you. Back to sleep. Goodnight")
+			print(_create_message("You woke me up! Shame on you. Back to sleep. Goodnight"))
 		return self.potatoes == self.task
 
 if __name__ == "__main__":
