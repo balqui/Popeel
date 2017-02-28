@@ -4,4 +4,7 @@ No parece que funcione... se cuelga en el push.
 
 Revierto a https por el momento - al intentar conectar con las faqs de la página me dice que down for maintenance.
 
+Ah, pero sí que se había hecho el commit, no lo entiendo porque no me preguntó la clave para desbloquear la id rsa.
+
+
 
