@@ -6,5 +6,7 @@ Revierto a https por el momento - al intentar conectar con las faqs de la págin
 
 Ah, pero sí que se había hecho el commit, no lo entiendo porque no me preguntó la clave para desbloquear la id rsa.
 
+Debe ser que el mismo push ha hecho dos commits, y ha funcionado al ir atrás a https. Pruebo otra vez a ver.
+
 
 
