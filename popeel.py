@@ -7,7 +7,7 @@ Popeel, a potato-peeling toy "software robot"
 
 from random import randrange
 
-DEFAULTTASK = 50 # if no task specified, default is to peel 50 potatoes
+DEFAULTTASK = 55 # if no task specified, default is to peel 55 potatoes
 
 def _create_message(m, mm=''):
 	r = "[Popeel says:] " + m 
