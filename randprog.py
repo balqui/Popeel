@@ -4,7 +4,7 @@ Copyleft: MIT License (https://en.wikipedia.org/wiki/MIT_License)
 
 Creation of random programs for Popeel, the potato-peeling toy "software robot"
 
-Todo: write on a file
+Todo: write on a file (and run it?)
 """
 
 from random import randrange

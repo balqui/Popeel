@@ -7,7 +7,8 @@ Popeel, a potato-peeling toy "software robot"
 
 from random import randrange
 
-DEFAULTTASK = 55 # if no task specified, default is to peel 55 potatoes
+DEFAULTTASK = 35 # if no task specified, default is to peel 35 potatoes
+MAXINIT = 15 # maximum of potatoes in basket upon creation
 
 def _create_message(m, mm=''):
 	r = "[Popeel says:] " + m 
@@ -24,7 +25,7 @@ class Popeel:
 		if randrange(5) == 0:
 			self.basket = 0
 		else:
-			self.basket = randrange(1, 16)
+			self.basket = 1 + randrange(MAXINIT)
 		if self.basket == 0:
 			print(_create_message("Starting out with no potatoes in my basket."))
 		else:
@@ -58,7 +59,7 @@ class Popeel:
 		if self.sleeping:
 			return
 		if self.basket > 0:
-			print(_create_message("I HATE to be sent for potatoes when I still have " + str(self.basket) + " potatoes left. :-("))
+			print(_create_message("I HATE to be sent for potatoes when I still have " + str(self.basket) + " left. :-("))
 		else:
 			print(_create_message("I don't have any potatoes in my basket."))
 			self.basket = randrange(5, 30)
