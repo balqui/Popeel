@@ -1,3 +1,8 @@
+
+Finalmente funcionó usando lo que sale en las FAQ sobre el puerto 443 en vez del 22.
+
+===
+
 Probando el acceso con ssh...
 
 No parece que funcione... se cuelga en el push.
