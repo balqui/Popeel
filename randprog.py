@@ -9,36 +9,36 @@ Todo: write on a file (and run it?)
 
 from random import randrange
 
-def prog(name, ind):
+def prog(name, ind, f):
 	s = randrange(9)
 	if s < 2:
-		print(" "*ind + name + ".refill_basket()")	
+		f.write(" "*ind + name + ".refill_basket()\n")	
 	elif s < 4:
-		print(" "*ind + name + ".peel_1_potato()")
+		f.write(" "*ind + name + ".peel_1_potato()\n")
 	elif s == 4:
-		print(" "*ind + name + ".discard_basket()")
+		f.write(" "*ind + name + ".discard_basket()\n")
 	elif s == 5:
-		print(" "*ind + name + ".go_sleep()")
+		f.write(" "*ind + name + ".go_sleep()\n")
 	elif s == 6:
-		wh_st(name, ind)
+		wh_st(name, ind, f)
 	elif s == 7:
-		if_st(name, ind)
+		if_st(name, ind, f)
 	else:
-		prog(name, ind)
-		prog(name, ind)
+		prog(name, ind, f)
+		prog(name, ind, f)
 
-def wh_st(name, ind):
-	print(" "*ind + "while " + cond(name) + ":")
-	prog(name, ind+2)
+def wh_st(name, ind, f):
+	f.write(" "*ind + "while " + cond(name) + ":\n")
+	prog(name, ind+2, f)
 
-def if_st(name, ind):
-	print(" "*ind + "if " + cond(name) + ":")
-	prog(name, ind+2)
+def if_st(name, ind, f):
+	f.write(" "*ind + "if " + cond(name) + ":\n")
+	prog(name, ind+2, f)
 	if randrange(5) == 0:
-		print(" "*ind + "else:")
-		prog(name, ind+2)
+		f.write(" "*ind + "else:\n")
+		prog(name, ind+2, f)
 
-def cond(name):
+def cond(name, f):
 	s = randrange(12)
 	if s == 0:
 		return cond(name) + " and " + cond(name)
@@ -53,7 +53,10 @@ def cond(name):
 
 
 name = "popeeler"
+filename = "rand_popeel_314.py"
 
-print("from popeel import Popeel")
-print(name + " = Popeel()")
-prog(name, 0)
+with open(filename,"w") as f:
+	f.write("from popeel import Popeel\n")
+	f.write(name + " = Popeel()\n")
+	prog(name, 0, f)
+	
