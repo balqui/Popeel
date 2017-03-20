@@ -11,6 +11,7 @@ from random import randrange
 
 def prog(name, ind, f):
 	s = randrange(9)
+	print(s)
 	if s < 2:
 		f.write(" "*ind + name + ".refill_basket()\n")	
 	elif s < 4:
@@ -38,7 +39,7 @@ def if_st(name, ind, f):
 		f.write(" "*ind + "else:\n")
 		prog(name, ind+2, f)
 
-def cond(name, f):
+def cond(name):
 	s = randrange(12)
 	if s == 0:
 		return cond(name) + " and " + cond(name)
@@ -53,7 +54,7 @@ def cond(name, f):
 
 
 name = "popeeler"
-filename = "rand_popeel_314.py"
+filename = "rand_popeel_1239.py"
 
 with open(filename,"w") as f:
 	f.write("from popeel import Popeel\n")
