@@ -54,7 +54,7 @@ def cond(name):
 
 
 name = "popeeler"
-filename = "rand_popeel_1241.py"
+filename = "rand_popeel_1242.py"
 
 with open(filename,"w") as f:
 	f.write("from popeel import Popeel\n")
