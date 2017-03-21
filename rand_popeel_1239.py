@@ -1,4 +1,13 @@
 from popeel import Popeel
 popeeler = Popeel()
-if not popeeler.basket_is_empty():
-  popeeler.peel_1_potato()
+if popeeler.enough_potatoes():
+  popeeler.refill_basket()
+else:
+  while popeeler.enough_potatoes() or popeeler.basket_is_empty() and popeeler.enough_potatoes() and not popeeler.enough_potatoes():
+    popeeler.refill_basket()
+  if popeeler.basket_is_empty():
+    while popeeler.enough_potatoes():
+      popeeler.peel_1_potato()
+      popeeler.refill_basket()
+      popeeler.go_sleep()
+    popeeler.peel_1_potato()
