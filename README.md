@@ -15,6 +15,9 @@ store with infinitely many more potatoes is available, but the
 task of going there to refill the basked has to be programmed
 explicitly.
 
+Two simpler goals are provided through the "first user" and
+"second user" program files.
+
 ### How do I get set up? ###
 
 Get the file popeel.py somewhere on your Python path. Files
