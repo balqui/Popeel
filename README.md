@@ -12,7 +12,7 @@ Standard goal: write an algorithm that leads Popeel to peel a
 given number of potatoes. Catch: potatoes are peeled one by one,
 taken from a basket with a limited number of potatoes. A large
 store with infinitely many more potatoes is available, but the
-task of going there to refill the basked has to be programmed
+task of going there to refill the basket has to be programmed
 explicitly.
 
 Two simpler goals are provided through the "first user" and
@@ -37,5 +37,3 @@ Propose similar problems and design how to support them.
 ### Who do I talk to? ###
 
 José Luis Balcázar, UPC, Barcelona; balqui in Bitbucket.
-
-
