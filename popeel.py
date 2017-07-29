@@ -4,13 +4,11 @@ Copyleft: MIT License (https://en.wikipedia.org/wiki/MIT_License)
 
 Early versions nov 2016; std class feb, jul 2017; singleton jul 2017
 
-PENDING: HANDLE _create_message AS A @staticmethod
-
 Popeel, a potato-peeling toy "software robot"
-* class Popeel, fully standard usage
+* class Popeel, for fully standard usage
 * class Popeel_, singleton-like, can be used without instantiation
   or through standard usage via a single instance, but will refuse 
-  creating further instances or to create one once used without
+  creating further instances, or to create one once used without
 """
 
 from random import randrange
@@ -18,12 +16,6 @@ from random import randrange
 DEFAULTTASK = 35 # if no task specified, default is to peel 35 potatoes
 MAXINIT = 15 # maximum of potatoes in basket upon creation
 WOKEUP = "You woke me up! Shame on you. Back to sleep. Goodnight."
-
-#def _create_message(m, mm=''):
-#	r = "[Popeel says:] " + m 
-#	if mm:
-#		r += "\n               " + mm
-#	return r
 
 class Popeel:
 	"""
@@ -52,11 +44,14 @@ class Popeel:
 
 	def set_task(self, n):
 		"set task to peeling n potatoes"
+		if self.sleeping:
+			self.sleeping = False
 		self.task = n
 		print(self._create_message("My task now is to peel " + str(n) + " potatoes."))
 	
 	def peel_1_potato(self):
 		if self.sleeping:
+			print(self._create_message(WOKEUP))
 			return
 		if self.basket > 0:
 			self.potatoes += 1
@@ -100,7 +95,7 @@ class Popeel:
 			print(self._create_message("Returning " + str(self.basket) + " potatoes to the main store. :-)"))
 		self.basket = 0
 	
-	def basket_is_empty(self):
+	def is_basket_empty(self):
 		if self.sleeping:
 			print(self._create_message(WOKEUP))
 		return self.basket == 0
@@ -138,23 +133,29 @@ class Popeel_:
 		Accept one instance, and only before doing anything
 		Detect sleeping being not None
 		"""
-		assert self.sleeping is None, "Please do not instantiate Popeel_ further"
+		assert self.sleeping is None, ("\n\nSORRY. Instantiating Popeel_ here is disallowed."
+							  "\nPlease use at most one instance and, if any, start with it.")
 		cls = self.__class__
 		cls.sleeping = False
-		if cls.basket == 0:
-			print(cls._create_message("Starting out with no potatoes in my basket."))
-		else:
-			print(cls._create_message("Starting out with " + str(cls.basket) + " potatoes in my basket."))
 
 	@classmethod
 	def set_task(cls, n):
 		"set task to peeling n potatoes"
+		if cls.sleeping is None or cls.sleeping:
+			cls.sleeping = False
+		if cls.basket == 0:
+			print(cls._create_message("Starting out with no potatoes in my basket."))
+		else:
+			print(cls._create_message("Starting out with " + str(cls.basket) + " potatoes in my basket."))
 		cls.task = n
 		print(cls._create_message("My task now is to peel " + str(n) + " potatoes."))
 	
 	@classmethod
 	def peel_1_potato(cls):
-		if cls.sleeping:
+		if cls.sleeping is None:
+			cls.sleeping = False
+		elif cls.sleeping:
+			print(cls._create_message(WOKEUP))
 			return
 		if cls.basket > 0:
 			cls.potatoes += 1
@@ -202,7 +203,7 @@ class Popeel_:
 		cls.basket = 0
 	
 	@classmethod
-	def basket_is_empty(cls):
+	def is_basket_empty(cls):
 		if cls.sleeping:
 			print(cls._create_message(WOKEUP))
 		return cls.basket == 0
@@ -218,13 +219,11 @@ if __name__ == "__main__":
 	Test first an instance of the standard class, then the singleton-like one
 	Alternatively, test the singleton-like one without instantiation
 	"""
-#	to_test = [ ]
-	to_test = [Popeel, Popeel_]
-	for cls in to_test:
+	for cls in [Popeel, Popeel_]:
 		print("Test instance of ", str(cls))
 		p = cls()
 		p.set_task(23)
-		if p.basket_is_empty():
+		if p.is_basket_empty():
 			print("NO POTATOES IN BASKET.")
 		else:
 			print("SOME POTATOES IN BASKET.")
@@ -240,7 +239,7 @@ if __name__ == "__main__":
 		p.peel_1_potato()
 		p.discard_basket()
 		p.go_sleep()
-		if p.basket_is_empty():
+		if p.is_basket_empty():
 			print("NO POTATOES IN BASKET.")
 		else:
 			print("SOME POTATOES IN BASKET.")
@@ -249,14 +248,10 @@ if __name__ == "__main__":
 		else:
 			print("NOT ENOUGH POTATOES.")
 
-	if Popeel_ in to_test:
-		exit(1)
-	
 	print("Test without instantiations")
 
 	Popeel_.set_task(20)
-	print("Popeel_.sleeping = ", Popeel_.sleeping)
-	if Popeel_.basket_is_empty():
+	if Popeel_.is_basket_empty():
 		print("NO POTATOES IN BASKET.")
 	else:
 		print("SOME POTATOES IN BASKET.")
@@ -269,7 +264,7 @@ if __name__ == "__main__":
 	Popeel_.peel_1_potato()
 	Popeel_.discard_basket()
 	Popeel_.go_sleep()
-	if Popeel_.basket_is_empty():
+	if Popeel_.is_basket_empty():
 		print("NO POTATOES IN BASKET.")
 	else:
 		print("SOME POTATOES IN BASKET.")

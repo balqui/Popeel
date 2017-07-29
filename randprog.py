@@ -48,7 +48,7 @@ def cond(name):
 	elif s < 4:
 		return "not " + cond(name)
 	if s < 8:
-		return name + ".basket_is_empty()"
+		return name + ".is_basket_empty()"
 	else:
 		return name + ".enough_potatoes()"
 

@@ -1,5 +1,5 @@
 from popeel import Popeel
 popeeler = Popeel()
-while popeeler.basket_is_empty():
-  if popeeler.basket_is_empty():
+while popeeler.is_basket_empty():
+  if popeeler.is_basket_empty():
     popeeler.discard_basket()

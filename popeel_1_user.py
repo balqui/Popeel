@@ -2,12 +2,12 @@
 Author: Jose L Balcazar, ORCID 0000-0003-4248-4528 
 Copyleft: MIT License (https://en.wikipedia.org/wiki/MIT_License)
 
-Usage of Popeel: example (feb 2017).
+Usage of Popeel: example (feb, jul 2017).
 """
 
-from popeel import Popeel
+from popeel import Popeel_
 
-p = Popeel() # will tell us how many potatoes are in the basket initially
+p = Popeel_() # will tell us how many potatoes are in the basket initially
 
 p.set_task(8) # set the task: please peel 8 potatoes
 

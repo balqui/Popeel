@@ -3,7 +3,7 @@ popeeler = Popeel()
 if popeeler.enough_potatoes():
   popeeler.refill_basket()
 else:
-  while popeeler.enough_potatoes() or popeeler.basket_is_empty() and popeeler.enough_potatoes() and not popeeler.enough_potatoes():
+  while popeeler.enough_potatoes() or popeeler.is_basket_empty() and popeeler.enough_potatoes() and not popeeler.enough_potatoes():
     popeeler.refill_basket()
   if popeeler.basket_is_empty():
     while popeeler.enough_potatoes():
