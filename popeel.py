@@ -42,13 +42,18 @@ class Popeel:
 		else:
 			print(self._create_message("Starting out with " + str(self.basket) + " potatoes in my basket."))
 
-	def set_task(self, n):
+	def set_task(self, n = None):
 		"set task to peeling n potatoes"
 		if self.sleeping:
 			self.sleeping = False
-		self.task = n
-		print(self._create_message("My task now is to peel " + str(n) + " potatoes."))
-	
+		if n is not None:
+			self.task = n
+			print(self._create_message("My task now is to peel " + str(n) + " potatoes."))
+		else:
+			"task 0 will never be completed"
+			self.task = 0
+			print(self._create_message("I have not been assigned a concrete task yet."))
+
 	def peel_1_potato(self):
 		if self.sleeping:
 			print(self._create_message(WOKEUP))
@@ -62,6 +67,7 @@ class Popeel:
 				mm = ""
 			print(self._create_message("Peeling one potato.", mm))
 			if self.potatoes == self.task:
+				"will never happen if task is zero"
 				print(self._create_message("Task completed.",
 									"I LIKE that very much. :-)"))
 		else:

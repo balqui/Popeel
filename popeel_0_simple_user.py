@@ -7,8 +7,14 @@ Usage of Popeel_ with no instances: very simple example (jul 2017).
 
 from popeel import Popeel_
 
+#Popeel_.peel_1_potato()
+
+#Popeel_.go_sleep()
+
+Popeel_.set_task(2)
+
 Popeel_.peel_1_potato()
 
-Popeel_.go_sleep()
+Popeel_.peel_1_potato()
 
 
