@@ -145,6 +145,8 @@ class Popeel_:
 		cls.sleeping = False
 
 	@classmethod
+	def set_task(self, n = None):
+		"set task to peeling n potatoes"
 	def set_task(cls, n):
 		"set task to peeling n potatoes"
 		if cls.sleeping is None or cls.sleeping:
@@ -153,9 +155,15 @@ class Popeel_:
 			print(cls._create_message("Starting out with no potatoes in my basket."))
 		else:
 			print(cls._create_message("Starting out with " + str(cls.basket) + " potatoes in my basket."))
-		cls.task = n
-		print(cls._create_message("My task now is to peel " + str(n) + " potatoes."))
-	
+
+		if n is not None:
+			cls.task = n
+			print(cls._create_message("My task now is to peel " + str(n) + " potatoes."))
+		else:
+			"task 0 will never be completed"
+			cls.task = 0
+			print(cls._create_message("I have not been assigned a concrete task yet."))
+
 	@classmethod
 	def peel_1_potato(cls):
 		if cls.sleeping is None:
