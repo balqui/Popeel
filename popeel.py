@@ -145,9 +145,7 @@ class Popeel_:
 		cls.sleeping = False
 
 	@classmethod
-	def set_task(self, n = None):
-		"set task to peeling n potatoes"
-	def set_task(cls, n):
+	def set_task(cls, n = None):
 		"set task to peeling n potatoes"
 		if cls.sleeping is None or cls.sleeping:
 			cls.sleeping = False
