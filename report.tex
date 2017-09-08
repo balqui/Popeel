@@ -1,0 +1,292 @@
+%
+% MENCIONAR ESTE REPORT EN LA PRESENTACION EN LA WEB ORIGINAL DE BITBUCKET
+%
+\documentclass[12pt]{article} 
+\title{A Software Simulator of the Very Simple Robot POPEEL%
+%\thanks{}
+}  
+\author{Jos\'e L. Balc\'azar \\
+% {\vspace{-0.5cm}} \\ 
+{Department of Computer Science} \\
+{Universitat Polit\`ecnica de Catalunya}}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{underscore}
+%\usepackage[ruled,vlined]{algorithm2e} % DOUBTFUL...
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}{Example}
+% \def\cite#1{[{\sl #1}]} % remove this when the references are ready
+\def\jlb#1{\par\noindent\smallskip{\bf\ [#1 --JLB]\par\smallskip}}
+% \def\jlb#1{\relax}
+% \usepackage{latexsym}
+% \usepackage{multicol}
+% \usepackage{enumitem}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We describe an open-source implementation of a
+Python class that supports an old programming
+exercise.
+\end{abstract}
+
+
+\section{Introduction}% \label{s:intro}
+
+Many years ago, at FIB, UPC \cite{FIB}, we used to 
+propose some simple on-paper programming exercises 
+to newcoming students. They involved peeling potatoes, 
+one by one, and keeping a count of them, and fetching 
+fresh basketfuls of potatoes when necessary. 
+
+Mostly everyone had some trouble solving the main
+statement, because it happens to be a hardish but 
+instructive exercise for people with no programming 
+experience. However, many of them had additional 
+trouble simply understanding what they were supposed 
+to do \cite{PBblog} (but, what potatoes are they 
+talking about?, must I bring an actual knife from 
+home tomorrow?\dots) Eventually, we stopped proposing 
+this exercise. Indeed, for novel programmers, writing 
+programs on paper (or a blackboard) and imagining 
+their runtime effect is difficult, and particularly so 
+when the effect is a runtime error.
+
+(However, many students of the time still vaguely
+remember, if not the precise exercise, some approximate
+notions of it.)
+
+These days, however, one can easily provide on the 
+web a working implementation, and object orientation
+allows for a simple syntax very similar to the 
+on-paper exercise of the old times. We have decided
+to create one, and expect to use it in the early
+lectures of the second edition of a first-year
+course on Programming \cite{mireport} in a local 
+Degree on Bioinformatics \cite{BDBI}.
+
+As happened in the old times, in our implementation
+there is a toy robot, Popeel, the 
+{\bf Po}tato {\bf peel}er, assumed to live in an 
+environment where an inexhaustible store of potatoes 
+is available nearby. It also has a basket with a few 
+potatoes. It can pick one potato from the basket and 
+peel it, but only if the basket is nonempty. It can go 
+fetch more potatoes from the main store, but will complain 
+if asked to do so unnecessarily. The basic operations
+offered by the class are to be used in writing small,
+correct programs for specific tasks.
+
+Each programming exercise sets up a task for the
+robot, that usually includes peeling some potatoes
+and that usually ends up putting the robot to sleep,
+after having finished its task. However, if asked to
+do something impossible, like peeling one potato
+from the basket
+when the basket is empty, Popeel will complain and
+just go sleeping --- further requests for action
+when it is sleeping will cause a bitter complain
+and then going back to bed.
+
+The reader is welcome to imagine it as a humanoid 
+robot but, for the time being, it is just a Python 
+class that informs of what is happening through
+a monologue.
+
+
+\section{The main class}
+
+The program is freely available in open-source,
+MIT-licensed form \cite{} and you are welcome
+to download it.
+The main class is, of course, Popeel: a class
+written in Python and compatible with both
+Python2 and Python3.
+
+Once an object of the class has been declared,
+as in {\tt p = Popeel()}, its methods can be
+called, as in {\tt p.peel_1_potato()} or
+{\tt p.go_sleep()}, following the standard
+Python object-oriented syntax.
+
+
+\subsection{Available operations}
+
+More precisely, the simple repertory of operations
+offered by this class of objects is:
+
+\begin{description}
+\item{{\tt peel_1_potato():}} Will peel one potato
+from the basket and report about it; however, will
+complain and go sleeping if it has no potatoes at all
+in the basket.
+\item{{\tt refill_basket():}} Will go to the main
+store and refill the empty basket with a variable 
+quantity of potatoes; will do nothing (except complaining)
+if it still has potatoes in the basket. 
+\item{{\tt discard_basket():}} Will return potatoes
+left in the basket to the main store. Popeel likes
+to do this when its task is complete. 
+\item{{\tt go_sleep():}} Popeel will complain if you
+wake it up after going to bed --- and then return to
+bed anyhow.
+\item{{\tt set_task(int):}} The goal is now to peel
+the number of potatoes indicated as argument.
+There is a default, implicit task for programs 
+that do not call this method.
+\item{{\tt basket_is_empty():}} Boolean function, 
+result as by its name.
+\item{{\tt enough_potatoes():}} Boolean function, indicates
+whether the task set (either explicitly through {\tt set_task}
+or implicitly) has been accomplished. Recommended usage
+before sending Popeel to bed. 
+\end{description}
+
+Somewhere in the download, we provide a file 
+{\tt popeel_user.py} with example usages of these operations.
+The {\tt print} statements may be unnecessary if these
+operations are run within the read-eval-print loop of
+an interpreter.
+
+\section{Example tasks}
+
+There is a main exercise task where we leave the
+goal quantity of potatoes to the initialization,
+which will set up Popeel in a somewhat random state;
+we return to this in the next section. However, it
+is worthwhile to start with simpler tasks. All
+the rest of this section assumes that you have
+a Python interpreter available and that the
+source code for the class, {\tt popeel.py}, is within
+the appropriate system paths (most likely, it will
+suffice to download it to some folder in your 
+equipment and run Python on program files in
+the same folder).
+
+\subsection{Peeling just one potato}
+
+It would seem that peeling one potato is to be
+the simplest task to program on top of Popeel,
+but actually a subsequent one is easier, as we
+shall see.
+
+We always start with a declaration of an object
+of the class {\tt Popeel}, after importing the class
+to have it available to our program:
+
+\qquad{\tt from popeel import Popeel}
+
+\qquad{\tt p = Popeel()}
+
+(The identifier {\tt p} is arbitrary, any other
+name will do; but use it consistently later on.)
+
+One might guess that the subsequent instructions
+would be:
+
+\qquad{\tt p.peel_1_potato()}
+
+\qquad{\tt p.go_sleep()}
+
+Try it repeatedly, maybe even many times, 
+before reading further, unless you see
+on your own why this solution is not correct; 
+for your convenience, we provide this program as file 
+{\tt popeel_simple_user.py} somewhere in the download.
+
+Once you understand why this solution is not
+correct, try and come up with a correct one
+on your own. 
+
+The task of peeling two potatoes is postponed for the moment.
+
+\subsection{Peeling all the potatoes in the basket}
+
+In this exercise, we task Popeel with peeling a
+variable number of potatoes: whatever ones it 
+happened to have in the basket upon being created.
+Thus, each run of this program will end up peeling a 
+different quantity of potatoes. Of course, once the
+basket becomes empty, Popeel is to be sent to sleep.
+
+For your convenience, we provide this program as file 
+{\tt popeel_first_user.py} but we heartily recommend to
+try your hand at writing the program without looking
+inside that file. We believe it will be easier than
+it seems.
+
+\subsection{Peeling two potatoes}
+
+The section title says it all. 
+Write your own solution and test it
+repeatedly and insistently before labeling it
+as good! 
+
+Don't forget sending Popeel to bed.
+Consider also the option of saving food by
+returning left-over potatoes, which remain
+unused in the basket, back to the main store.
+
+\subsection{Peeling two basketfuls of potatoes}
+
+Again each run of this program will end up peeling a 
+different quantity of potatoes, but this time, once
+all the potatoes in the initial basket are peeled,
+we refill the basket and peel all the potatoes again.
+And again, for your convenience, we provide a solution 
+as file {\tt popeel_second_user.py} but we insist that you
+should write and thoroughly test your program before 
+comparing it to our own.
+
+\subsection{Random Popeel programs}
+
+The download includes a number of programs created
+randomly, as well as a program, {\tt randprog.py}, that
+you can use yourself to create random programs on 
+top of Popeel\dots\ and to guess what they do \emph{before}
+running them (but there is no need of your looking 
+inside {\tt randprog.py} --- its essence is a so-called
+probabilistic generative grammar).
+
+\section{The main exercise}
+
+The main exercise is to peel a fixed amount of potatoes.
+There is a default value (currently 45 potatoes, but 
+this might change) which you of course override by
+calling
+
+\qquad{\tt p.set_task(12)}
+
+if you want to peel 12 potatoes, or whatever number
+you fancy. Thus, say the program starts with:
+
+\qquad{\tt from popeel import Popeel}
+
+\qquad{\tt p = Popeel()}
+
+\qquad{\tt p.set_task(12)}
+
+How does it continue? We do not provide a solution:
+it is your task to construct it, and we hope that
+some readers will have learned something by doing
+this exercise. We do provide, however, a couple of
+examples of Popeel's monologue for two cases:
+when it happens to start with no potatoes in the
+basket (file {\tt popeel_correct_output_0.txt})
+and when it happens to start with six potatoes in the
+basket (file {\tt popeel_correct_output_6.txt});
+of course the quantities, and the places where
+Popeel reports the number of potatoes peeled so far,
+may vary, depending on the quantities of potatoes
+obtained at the time of refilling the basket.
+
+
+% https://bitbucket.org/balqui/popeel
+
+
+\end{document}
+
+
