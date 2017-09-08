@@ -11,7 +11,7 @@
 {Universitat Polit\`ecnica de Catalunya}}
 \usepackage{fullpage}
 \usepackage{hyperref}
-\usepackage{underscore}
+\usepackage{underscore}\makeatletter
 %\usepackage[ruled,vlined]{algorithm2e} % DOUBTFUL...
 %\newtheorem{theorem}{Theorem}
 %\newtheorem{lemma}[theorem]{Lemma}
@@ -54,19 +54,20 @@ this exercise. Indeed, for novel programmers, writing
 programs on paper (or a blackboard) and imagining 
 their runtime effect is difficult, and particularly so 
 when the effect is a runtime error.
-
-(However, many students of the time still vaguely
+(However, even after such long years,
+many students of the time still vaguely
 remember, if not the precise exercise, some approximate
 notions of it.)
 
+\looseness=-1
 These days, however, one can easily provide on the 
 web a working implementation, and object orientation
 allows for a simple syntax very similar to the 
 on-paper exercise of the old times. We have decided
-to create one, and expect to use it in the early
+to create one \cite{Popeel}, and expect to use it in the early
 lectures of the second edition of a first-year
 course on Programming \cite{mireport} in a local 
-Degree on Bioinformatics \cite{BDBI}.
+Degree on Bioinformatics~\cite{BDBI}.
 
 As happened in the old times, in our implementation
 there is a toy robot, Popeel, the 
@@ -100,9 +101,9 @@ a monologue.
 \section{The main class}
 
 The program is freely available in open-source,
-MIT-licensed form \cite{} and you are welcome
+MIT-licensed form \cite{MITlicense} and you are welcome
 to download it.
-The main class is, of course, Popeel: a class
+The main class is, of course, {\tt Popeel}: a class
 written in Python and compatible with both
 Python2 and Python3.
 
@@ -112,6 +113,23 @@ called, as in {\tt p.peel_1_potato()} or
 {\tt p.go_sleep()}, following the standard
 Python object-oriented syntax.
 
+An alternative, ``singleton'' class is also 
+available: {\tt Popeel_}, with an extra underscore
+in its name. Its advantage is that it can be used
+(and we are using it) {\it before} the notion
+of variable has been discussed: after importing
+the name, one just calls the (now ``static'') methods
+with the same names as before: {\tt Popeel_.peel_1_potato()} 
+or {\tt Popeel_.go_sleep()} --- more
+precisely, they are ``@{\tt classmethod}'''s now; 
+one object of class {\tt Popeel_} can be declared 
+as well, like with a regular class, but, being a
+singleton class, only one object of the class
+is allowed. 
+
+Eventually, we are likely to dispose of one of the 
+two options, but we are not in a hurry to do so
+until after some evaluation of their usage.
 
 \subsection{Available operations}
 
@@ -145,9 +163,11 @@ or implicitly) has been accomplished. Recommended usage
 before sending Popeel to bed. 
 \end{description}
 
-Somewhere in the download, we provide a file 
-{\tt popeel_user.py} with example usages of these operations.
-The {\tt print} statements may be unnecessary if these
+Somewhere in the download, we provide files 
+% {\tt popeel_user.py} 
+with example usages of these operations.
+Some of these include {\tt print} statements, 
+which may become unnecessary if the
 operations are run within the read-eval-print loop of
 an interpreter.
 
@@ -191,11 +211,20 @@ would be:
 
 \qquad{\tt p.go_sleep()}
 
-Try it repeatedly, maybe even many times, 
-before reading further, unless you see
-on your own why this solution is not correct; 
-for your convenience, we provide this program as file 
-{\tt popeel_simple_user.py} somewhere in the download.
+You see on your own why this solution is not correct; 
+otherwise, try it, insistingly, maybe even many times, 
+before reading further. 
+% For your convenience, we provide 
+% this program as file 
+% {\tt popeel_simple_user.py} somewhere in the download.
+By the way, the simpler, quite intuitive, but equally wrong 
+alternative using the singleton class is:
+
+\qquad{\tt from popeel import Popeel_}
+
+\qquad{\tt Popeel_.peel_1_potato()}
+
+\qquad{\tt Popeel_.go_sleep()}
 
 Once you understand why this solution is not
 correct, try and come up with a correct one
@@ -212,11 +241,12 @@ Thus, each run of this program will end up peeling a
 different quantity of potatoes. Of course, once the
 basket becomes empty, Popeel is to be sent to sleep.
 
-For your convenience, we provide this program as file 
-{\tt popeel_first_user.py} but we heartily recommend to
-try your hand at writing the program without looking
-inside that file. We believe it will be easier than
-it seems.
+% For your convenience, we provide this program as file 
+% {\tt popeel_first_user.py} but we heartily recommend to
+% try 
+Try your hand at writing the program without looking
+inside any file in the download. We believe it will 
+be easier than it seems.
 
 \subsection{Peeling two potatoes}
 
@@ -236,10 +266,10 @@ Again each run of this program will end up peeling a
 different quantity of potatoes, but this time, once
 all the potatoes in the initial basket are peeled,
 we refill the basket and peel all the potatoes again.
-And again, for your convenience, we provide a solution 
-as file {\tt popeel_second_user.py} but we insist that you
-should write and thoroughly test your program before 
-comparing it to our own.
+% And again, for your convenience, we provide a solution 
+% as file {\tt popeel_second_user.py} but we insist that you
+% should write and thoroughly test your program before 
+% comparing it to our own.
 
 \subsection{Random Popeel programs}
 
@@ -254,20 +284,26 @@ probabilistic generative grammar).
 \section{The main exercise}
 
 The main exercise is to peel a fixed amount of potatoes.
-There is a default value (currently 45 potatoes, but 
+There is a default value (currently 35 potatoes, but 
 this might change) which you of course override by
-calling
+calling either
 
 \qquad{\tt p.set_task(12)}
 
+\noindent
+or
+
+\qquad{\tt Popeel_.set_task(12)}
+
+\noindent
 if you want to peel 12 potatoes, or whatever number
 you fancy. Thus, say the program starts with:
 
-\qquad{\tt from popeel import Popeel}
+\qquad{\tt from popeel import Popeel_}
 
-\qquad{\tt p = Popeel()}
+% \qquad{\tt p = Popeel()}
 
-\qquad{\tt p.set_task(12)}
+\qquad{\tt Popeel_.set_task(12)}
 
 How does it continue? We do not provide a solution:
 it is your task to construct it, and we hope that
@@ -283,10 +319,37 @@ Popeel reports the number of potatoes peeled so far,
 may vary, depending on the quantities of potatoes
 obtained at the time of refilling the basket.
 
+\begin{thebibliography}{10}
 
-% https://bitbucket.org/balqui/popeel
+\bibitem{FIB}
+\url{www.fib.upc.edu}
 
+\bibitem{PBblog}
+\url{https://patriciamiriam.wordpress.com/2017/02/14/carta-a-mi-tio-en-respuesta-a-la-suya-del-23-de-noviembre-de-1982/}
+
+\bibitem{Popeel}
+\url{https://bitbucket.org/balqui/popeel}
+
+\bibitem{mireport}
+\url{http://www.cs.upc.edu/~balqui/proal16.pdf}
+
+\bibitem{BDBI}
+\url{https://www.esci.upf.edu/en/bachelors-degree-in-bioinformatics/bachelors-degree-bioinformatics}
+
+\bibitem{MITlicense}
+\url{https://en.wikipedia.org/wiki/MIT_License}
+
+\end{thebibliography}
 
 \end{document}
+
+
+
+
+
+
+
+
+
 
 
