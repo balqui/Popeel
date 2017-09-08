@@ -2,7 +2,7 @@
 Author: Jose L Balcazar, ORCID 0000-0003-4248-4528 
 Copyleft: MIT License (https://en.wikipedia.org/wiki/MIT_License)
 
-One correct usage of Popeel (feb, jul 2017).
+One correct usage of Popeel_ (feb, jul 2017).
 
 Spoiler. 
 
