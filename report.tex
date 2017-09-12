@@ -204,7 +204,7 @@ suffice to download it to some folder in your
 equipment and run Python on program files in
 the same folder).
 
-\subsection{Peeling just one potato (and resting then)}
+\subsection{Peeling just one potato (and then taking a rest)}
 
 It would seem that peeling one potato is to be
 the simplest task to program on top of Popeel,
@@ -285,7 +285,7 @@ as good!
 Don't forget sending Popeel to bed.
 Consider also the option of saving food by
 returning left-over potatoes, which remain
-unused in the basket, back to the main store.
+unused in the basket, back to the pantry.
 
 \subsection{Peeling two basketfuls of potatoes}
 
@@ -298,53 +298,51 @@ we refill the basket and peel all the potatoes again.
 % should write and thoroughly test your program before 
 % comparing it to our own.
 
-\subsection{Random Popeel programs}
+% \subsection{Random Popeel programs}
 
-The download includes a number of programs created
-randomly, as well as a program, {\tt randprog.py}, that
-you can use yourself to create random programs on 
-top of Popeel\dots\ and to guess what they do \emph{before}
-running them (but there is no need of your looking 
-inside {\tt randprog.py} --- its essence is a so-called
-probabilistic generative grammar).
+% The download includes a number of programs created
+% randomly, as well as a program, {\tt randprog.py}, that
+% you can use yourself to create random programs on 
+% top of Popeel\dots\ and to guess what they do \emph{before}
+% running them (but there is no need of your looking 
+% inside {\tt randprog.py} --- its essence is a so-called
+% probabilistic generative grammar).
 
 \section{The main exercise}
 
 The main exercise is to peel a fixed amount of potatoes.
-There is a default value (currently 35 potatoes, but 
-this might change) which you of course override by
-calling either
+There is a default value (currently 35 potatoes) 
+which you of course override by
+calling {\tt Popeel.set_task(12)} if you want 
+to peel 12 potatoes, or whatever number you fancy. 
+Alternatively, use {\tt p.set_task(12)} if
+you declare an object {\tt p} of class {\tt Popeel}.
 
-\qquad{\tt p.set_task(12)}
+Thus, say the program starts with:
 
-\noindent
-or
-
-\qquad{\tt Popeel_.set_task(12)}
-
-\noindent
-if you want to peel 12 potatoes, or whatever number
-you fancy. Thus, say the program starts with:
-
-\qquad{\tt from popeel import Popeel_}
+\qquad{\tt from popeel import Popeel}
 
 % \qquad{\tt p = Popeel()}
 
-\qquad{\tt Popeel_.set_task(12)}
+\qquad{\tt Popeel.set_task(12)}
 
 How does it continue? We do not provide a solution:
 it is your task to construct it, and we hope that
 some readers will have learned something by doing
 this exercise. We do provide, however, a couple of
-examples of Popeel's monologue for two cases:
-when it happens to start with no potatoes in the
-basket (file {\tt popeel_correct_output_0.txt})
-and when it happens to start with six potatoes in the
-basket (file {\tt popeel_correct_output_6.txt});
-of course the quantities, and the places where
+examples of Popeel's monologue for two correct cases:
+in one, it happens to start with no potatoes in the
+basket (file {\tt popeel_correct_output_0.txt});
+in the other, bearing in fact little difference,
+it happens to start with some potatoes 
+in the
+basket (file {\tt popeel_correct_output_6.txt}).
+Of course, the exact quantities, and the places where
 Popeel reports the number of potatoes peeled so far,
-may vary, depending on the quantities of potatoes
-obtained at the time of refilling the basket.
+or needs to fetch more potatoes,
+may vary, depending on the (somewhat random) 
+quantities of potatoes
+obtained at each time of refilling the basket.
 
 \begin{thebibliography}{10}
 
