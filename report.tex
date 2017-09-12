@@ -57,7 +57,7 @@ Thus, often, a number of students had trouble simply understanding
 what they were supposed to do \cite{PBblog} (but, what 
 potatoes are they talking about?, must I bring an actual 
 knife from home tomorrow?\dots) Eventually, we stopped 
-proposing this exercise; but, even after such long years,
+proposing this exercise; but, even now, after such long years,
 many students of the time still vaguely remember, 
 if not the precise exercise, some approximate
 notions of it.
@@ -93,7 +93,7 @@ after having finished its task. However, if asked to
 do something impossible, like peeling one potato
 from the basket
 when the basket is empty, Popeel will complain and
-just go sleeping --- further requests for action
+just go sleeping directly --- further requests for action
 when it is sleeping will cause a bitter complain
 and then going back to bed.
 
@@ -116,7 +116,7 @@ The class is programmed so that it can be used in a course
 {\it before} the students have been exposed to the 
 notion of a variable (and we are using it so).
 It follows the ``singleton'' pattern: after 
-importing the name, one just calls the methods as in 
+importing the class name, one just calls the methods as in 
 {\tt Popeel.peel_1_potato()} or {\tt Popeel.go_sleep()}
  --- more precisely, they are ``@{\tt classmethod}'''s.
 
@@ -133,7 +133,7 @@ will be allowed.
 %\looseness=1
 An alternative, ``non-singleton'' class is also 
 available: {\tt Popeel_}, with an extra underscore
-at the end of its name. This variant can be used in the
+at the end of its name. This variant can be used in a
 fully standard form: as many objects of the class 
 as desired can be declared, and their 
 methods (now not anymore ``@{\tt classmethod}'''s!) %, but fully standard) 
@@ -166,10 +166,10 @@ to do this when its task is complete.
 \item{{\tt go_sleep():}} Popeel will complain if you
 wake it up after going to bed --- and then return to
 bed anyhow.
-\item{{\tt set_task(int):}} The goal is now to peel
-the number of potatoes indicated as argument.
+\item{{\tt set_task(int):}} Set the goal. Popeel aims now 
+at peeling the number of potatoes indicated as argument.
 There is a default, implicit task for programs 
-that do not call this method.
+that do not include a call to this method.
 \item{{\tt is_basket_empty():}} Boolean function, 
 result as by its name.
 \item{{\tt enough_potatoes():}} Boolean function, indicates
@@ -276,18 +276,6 @@ Try your hand at writing the program without looking
 inside any file in the download. We believe it will 
 be easier than it seems.
 
-\subsection{Peeling two potatoes}
-
-The section title says it all. 
-Write your own solution and test it
-repeatedly and insistently before labeling it
-as good! 
-
-Don't forget sending Popeel to bed.
-Consider also the option of saving food by
-returning left-over potatoes, which remain
-unused in the basket, back to the pantry.
-
 \subsection{Peeling two basketfuls of potatoes}
 
 Again each run of this program will end up peeling a 
@@ -309,15 +297,28 @@ we refill the basket and peel all the potatoes again.
 % inside {\tt randprog.py} --- its essence is a so-called
 % probabilistic generative grammar).
 
+\subsection{Peeling two potatoes}
+
+The section title says it all. 
+Write your own solution and test it
+repeatedly and insistently before labeling it
+as good! 
+
+Don't forget sending Popeel to bed.
+Consider also the option of saving food by
+returning left-over potatoes, which remain
+unused in the basket, back to the pantry.
+
 \section{The main exercise}
 
 The main exercise is to peel a fixed amount of potatoes.
 There is a default value (currently 35 potatoes) 
-which you of course override by
+which you can of course override by
 calling {\tt Popeel.set_task(12)} if you want 
 to peel 12 potatoes, or whatever number you fancy. 
 Alternatively, use {\tt p.set_task(12)} if
-you declare an object {\tt p} of class {\tt Popeel}.
+you declare an object {\tt p} of class {\tt Popeel}
+or of class {\tt Popeel_}.
 
 Thus, say the program starts with:
 
@@ -334,7 +335,7 @@ this exercise. We do provide, however, a couple of
 examples of Popeel's monologue for two correct cases:
 in one, it happens to start with no potatoes in the
 basket (file {\tt popeel_correct_output_0.txt});
-in the other, bearing in fact little difference,
+in the other, bearing in fact little essential difference,
 it happens to start with some potatoes 
 in the
 basket (file {\tt popeel_correct_output_6.txt}).
@@ -354,7 +355,8 @@ obtained at each time of refilling the basket.
 \url{https://patriciamiriam.wordpress.com/2017/02/14/carta-a-mi-tio-en-respuesta-a-la-suya-del-23-de-noviembre-de-1982/}
 
 \bibitem{Popeel}
-\url{https://bitbucket.org/balqui/popeel}
+\url{https://bitbucket.org/balqui/popeel} (most recent advisable download
+at the time of writing: \url{https://bitbucket.org/balqui/popeel/get/v0.1.2.zip}).
 
 \bibitem{mireport}
 \url{http://www.cs.upc.edu/~balqui/proal16.pdf}
