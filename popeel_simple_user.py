@@ -5,9 +5,9 @@ Copyleft: MIT License (https://en.wikipedia.org/wiki/MIT_License)
 Usage of Popeel_ with no instances: very simple example (jul 2017).
 """
 
-from popeel import Popeel_
+from popeel import Popeel
 
-Popeel_.peel_1_potato()
+Popeel.peel_1_potato()
 
-Popeel_.go_sleep()
+Popeel.go_sleep()
 
