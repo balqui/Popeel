@@ -2,7 +2,7 @@
 
 Source code for Popeel, a potato-peeling toy software "robot".
 
-Current version 0.1.1.
+Current version 0.1.2.
 
 Should work under both Python2 and Python3.
 
@@ -36,4 +36,4 @@ Propose similar problems and design how to support them.
 
 ### Who do I talk to? ###
 
-Jos√© Luis Balc√°zar, UPC, Barcelona; balqui in Bitbucket.
+JosÈ Luis Balc·zar, UPC, Barcelona; balqui in Bitbucket.
