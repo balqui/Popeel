@@ -7,9 +7,11 @@ Usage of Popeel: simpler problem of peeling all potatoes in the basket.
 
 from popeel import Popeel
 
-while not Popeel.is_basket_empty():
-	Popeel.peel_1_potato()
+p = Popeel() # will tell us how many potatoes are in the basket initially
 
-Popeel.go_sleep()
+while not p.is_basket_empty():
+	p.peel_1_potato()
+
+p.go_sleep()
 
 
