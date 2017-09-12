@@ -24,10 +24,10 @@ class Popeel:
 	before introducing variables
 	"""
 
+	# init class fields sleeping, task, potatoes, basket
 	sleeping = None
 	task = DEFAULTTASK
 	potatoes = 0
-
 	if randrange(5) == 0:
 		basket = 0
 	else:

@@ -2,8 +2,10 @@
 % MENCIONAR ESTE REPORT EN LA PRESENTACION EN LA WEB ORIGINAL DE BITBUCKET
 %
 \documentclass[12pt]{article} 
-\title{A Software Simulator of the Very Simple Robot POPEEL%
+\title{A Software Simulator of the Very Simple Robot \emph{Popeel}%
 %\thanks{}
+\\ \medskip\Large
+(or: Potato Peeling, Resurrected!)
 }  
 \author{Jos\'e L. Balc\'azar \\
 % {\vspace{-0.5cm}} \\ 
@@ -30,34 +32,35 @@
 \begin{abstract}
 We describe an open-source implementation of a
 Python class that supports an old programming
-exercise.
+exercise related to peeling potatoes.
 \end{abstract}
 
 
 \section{Introduction}% \label{s:intro}
 
 Many years ago, at FIB, UPC \cite{FIB}, we used to 
-propose some simple on-paper programming exercises 
+propose some simple, on-paper programming exercises 
 to newcoming students. They involved peeling potatoes, 
 one by one, and keeping a count of them, and fetching 
 fresh basketfuls of potatoes when necessary. 
 
-Mostly everyone had some trouble solving the main
-statement, because it happens to be a hardish but 
-instructive exercise for people with no programming 
-experience. However, many of them had additional 
-trouble simply understanding what they were supposed 
-to do \cite{PBblog} (but, what potatoes are they 
-talking about?, must I bring an actual knife from 
-home tomorrow?\dots) Eventually, we stopped proposing 
-this exercise. Indeed, for novel programmers, writing 
-programs on paper (or a blackboard) and imagining 
-their runtime effect is difficult, and particularly so 
-when the effect is a runtime error.
-(However, even after such long years,
-many students of the time still vaguely
-remember, if not the precise exercise, some approximate
-notions of it.)
+Mostly everyone with no previous programming 
+experience had some trouble solving the main
+statement. Indeed, it happens to be a hardish but 
+instructive exercise at that level. However, 
+for novel programmers, writing programs on paper 
+(or a blackboard) and imagining their runtime effect 
+is difficult, and particularly so when the effect 
+is a runtime error.
+
+Thus, often, a number of students had trouble simply understanding 
+what they were supposed to do \cite{PBblog} (but, what 
+potatoes are they talking about?, must I bring an actual 
+knife from home tomorrow?\dots) Eventually, we stopped 
+proposing this exercise; but, even after such long years,
+many students of the time still vaguely remember, 
+if not the precise exercise, some approximate
+notions of it.
 
 \looseness=-1
 These days, however, one can easily provide on the 
@@ -75,8 +78,9 @@ there is a toy robot, Popeel, the
 environment where an inexhaustible store of potatoes 
 is available nearby. It also has a basket with a few 
 potatoes. It can pick one potato from the basket and 
-peel it, but only if the basket is nonempty. It can go 
-fetch more potatoes from the main store, but will complain 
+peel it but, of course, only if the basket is nonempty. It can go 
+fetch more potatoes from the main store (the \emph{pantry}), 
+but will complain 
 if asked to do so unnecessarily. The basic operations
 offered by the class are to be used in writing small,
 correct programs for specific tasks.
@@ -102,38 +106,47 @@ a monologue.
 
 The program is freely available in open-source,
 MIT-licensed form \cite{MITlicense} and you are welcome
-to download it.
+to download it \cite{Popeel}.
 The main class is, of course, {\tt Popeel}: a class
 written in Python and compatible with both
 Python2 and Python3.
 
-Once an object of the class has been declared,
-as in {\tt p = Popeel()}, its methods can be
-called, as in {\tt p.peel_1_potato()} or
+The class is programmed so that it can be used in a course
+{\it before} the students have been exposed to the 
+notion of a variable (and we are using it so).
+It follows the ``singleton'' pattern: after 
+importing the name, one just calls the methods as in 
+{\tt Popeel.peel_1_potato()} or {\tt Popeel.go_sleep()}
+ --- more precisely, they are ``@{\tt classmethod}'''s.
+
+If variables are already conceptually available, then
+one object of class {\tt Popeel} 
+can be declared as well, and used like with a regular class,
+as in, say, {\tt p = Popeel()}. Then, its methods
+can be called, as in {\tt p.peel_1_potato()} or
 {\tt p.go_sleep()}, following the standard
-Python object-oriented syntax.
-
-An alternative, ``singleton'' class is also 
-available: {\tt Popeel_}, with an extra underscore
-in its name. Its advantage is that it can be used
-(and we are using it) {\it before} the notion
-of variable has been discussed: after importing
-the name, one just calls the (now ``static'') methods
-with the same names as before: {\tt Popeel_.peel_1_potato()} 
-or {\tt Popeel_.go_sleep()} --- more
-precisely, they are ``@{\tt classmethod}'''s now; 
-one object of class {\tt Popeel_} can be declared 
-as well, like with a regular class, but, being a
+Python object-oriented syntax; but, being a
 singleton class, only one object of the class
-is allowed. 
+will be allowed. 
 
-Eventually, we are likely to dispose of one of the 
-two options, but we are not in a hurry to do so
-until after some evaluation of their usage.
+%\looseness=1
+An alternative, ``non-singleton'' class is also 
+available: {\tt Popeel_}, with an extra underscore
+at the end of its name. This variant can be used in the
+fully standard form: as many objects of the class 
+as desired can be declared, and their 
+methods (now not anymore ``@{\tt classmethod}'''s!) %, but fully standard) 
+called in the usual way. However, if several
+objects are in use, their messages will be likely
+to show up in a confusing manner. The statements
+we use {\tt Popeel} for only need one instance, and
+we discourage, for the time being, the usage of this 
+standard variant of the class.
+
 
 \subsection{Available operations}
 
-More precisely, the simple repertory of operations
+The simple repertory of operations
 offered by this class of objects is:
 
 \begin{description}
@@ -141,12 +154,13 @@ offered by this class of objects is:
 from the basket and report about it; however, will
 complain and go sleeping if it has no potatoes at all
 in the basket.
-\item{{\tt refill_basket():}} Will go to the main
-store and refill the empty basket with a variable 
+\item{{\tt refill_basket():}} Will go to the pantry
+% main store 
+and refill the empty basket with a variable 
 quantity of potatoes; will do nothing (except complaining)
 if it still has potatoes in the basket. 
 \item{{\tt discard_basket():}} Will return potatoes
-left in the basket to the main store. Popeel likes
+left in the basket back to the pantry. Popeel likes
 to do this when its task is complete. 
 \item{{\tt go_sleep():}} Popeel will complain if you
 wake it up after going to bed --- and then return to
@@ -155,28 +169,31 @@ bed anyhow.
 the number of potatoes indicated as argument.
 There is a default, implicit task for programs 
 that do not call this method.
-\item{{\tt basket_is_empty():}} Boolean function, 
+\item{{\tt is_basket_empty():}} Boolean function, 
 result as by its name.
 \item{{\tt enough_potatoes():}} Boolean function, indicates
 whether the task set (either explicitly through {\tt set_task}
-or implicitly) has been accomplished. Recommended usage
-before sending Popeel to bed. 
+or implicitly) has been accomplished. 
+%Recommended usage before sending Popeel to bed. 
 \end{description}
 
-Somewhere in the download, we provide files 
-% {\tt popeel_user.py} 
-with example usages of these operations.
-Some of these include {\tt print} statements, 
-which may become unnecessary if the
-operations are run within the read-eval-print loop of
-an interpreter.
+% Somewhere in the download, we provide files 
+% % {\tt popeel_user.py} 
+% with example usages of these operations.
+% Some of these include {\tt print} statements, 
+% which may become unnecessary if the
+% operations are run within the read-eval-print loop of
+% an interpreter.
 
 \section{Example tasks}
 
-There is a main exercise task where we leave the
-goal quantity of potatoes to the initialization,
-which will set up Popeel in a somewhat random state;
-we return to this in the next section. However, it
+There is a main exercise task, that we leave for the 
+next section, as
+% where we leave the
+% goal quantity of potatoes to the initialization,
+% which will set up {\tt Popeel} in a somewhat random state;
+% we return to this in the next section. However, 
+it
 is worthwhile to start with simpler tasks. All
 the rest of this section assumes that you have
 a Python interpreter available and that the
@@ -186,46 +203,52 @@ suffice to download it to some folder in your
 equipment and run Python on program files in
 the same folder).
 
-\subsection{Peeling just one potato}
+\subsection{Peeling just one potato (and resting then)}
 
 It would seem that peeling one potato is to be
 the simplest task to program on top of Popeel,
 but actually a subsequent one is easier, as we
 shall see.
 
-We always start with a declaration of an object
-of the class {\tt Popeel}, after importing the class
-to have it available to our program:
+% We always start with a declaration of an object
+% of the class {\tt Popeel}, after importing the class
+% to have it available to our program:
+
+% \qquad{\tt from popeel import Popeel}
+
+% \qquad{\tt p = Popeel()}
+
+% (The identifier {\tt p} is arbitrary, any other
+% name will do; but use it consistently later on.)
+
+% One might guess that the subsequent instructions
+% would be:
+
+% \qquad{\tt p.peel_1_potato()}
+
+% \qquad{\tt p.go_sleep()}
+
+Indeed, one might guess that this program would
+accomplish the task:
 
 \qquad{\tt from popeel import Popeel}
 
-\qquad{\tt p = Popeel()}
+\qquad{\tt Popeel.peel_1_potato()}
 
-(The identifier {\tt p} is arbitrary, any other
-name will do; but use it consistently later on.)
+\qquad{\tt Popeel.go_sleep()}
 
-One might guess that the subsequent instructions
-would be:
-
-\qquad{\tt p.peel_1_potato()}
-
-\qquad{\tt p.go_sleep()}
-
-You see on your own why this solution is not correct; 
+You might see on your own why this solution is not correct; 
 otherwise, try it, insistingly, maybe even many times, 
 before reading further. 
 % For your convenience, we provide 
 % this program as file 
 % {\tt popeel_simple_user.py} somewhere in the download.
-By the way, the simpler, quite intuitive, but equally wrong 
-alternative using the singleton class is:
-
-\qquad{\tt from popeel import Popeel_}
-
-\qquad{\tt Popeel_.peel_1_potato()}
-
-\qquad{\tt Popeel_.go_sleep()}
-
+% By the way, the simpler, quite intuitive, but equally wrong 
+% alternative using the singleton class is:
+% \qquad{\tt from popeel import Popeel_}
+% \qquad{\tt Popeel_.peel_1_potato()}
+% \qquad{\tt Popeel_.go_sleep()}
+%
 Once you understand why this solution is not
 correct, try and come up with a correct one
 on your own. 
