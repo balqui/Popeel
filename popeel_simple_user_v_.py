@@ -2,7 +2,7 @@
 Author: Jose L Balcazar, ORCID 0000-0003-4248-4528 
 Copyleft: MIT License (https://en.wikipedia.org/wiki/MIT_License)
 
-Usage of Popeel_ with one instance: very simple example (feb, jul 2017).
+Usage of Popeel_ with one variable: very simple (wrong) example (feb, jul, oct 2017).
 """
 
 from popeel import Popeel_
