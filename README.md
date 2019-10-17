@@ -36,4 +36,4 @@ Propose similar problems and design how to support them.
 
 ### Who do I talk to? ###
 
-JosÈ Luis Balc·zar, UPC, Barcelona; balqui in Bitbucket.
+Jos√© Luis Balc√°zar, UPC, Barcelona; balqui in Github.
